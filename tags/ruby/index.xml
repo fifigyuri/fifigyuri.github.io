@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ruby on another blog about coding</title>
+    <link>//fifigyuri.github.io/tags/ruby/</link>
+    <description>Recent content in Ruby on another blog about coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 13 Aug 2013 18:00:48 +0200</lastBuildDate>
+    <atom:link href="//fifigyuri.github.io/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Heimdallr with Active Model Serializers</title>
+      <link>//fifigyuri.github.io/post/20130813-heimdallr-with-active-model-serializers/</link>
+      <pubDate>Tue, 13 Aug 2013 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20130813-heimdallr-with-active-model-serializers/</guid>
+      <description>&lt;p&gt;I have introduced &lt;a href=&#34;https://github.com/inossidabile/heimdallr&#34;&gt;heimdallr&lt;/a&gt; in an &lt;a href=&#34;//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr&#34;&gt;earlier post&lt;/a&gt;. It is an excellent tool for securing models. &lt;code&gt;heimdallr&lt;/code&gt; can create proxies for collections and records, it is possible to define scopes for fetching and deletion, and which messages are permitted to be forwarded to the proxied record. I use &lt;code&gt;active_model_serializers&lt;/code&gt; for serialization. It provides an elegant way to define serialization rules for the models.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;active_model_serializers&lt;/code&gt; does not work with the collections and records secured by a proxy out of the box. It would be good to know what should happen when a not permitted attribute is accessed on the model. I thought about two options:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;the serializer could raise a permission error or&lt;/li&gt;
+&lt;li&gt;it serializes a value interpreted as not readable.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I chose the second approach. However, as json does not know about symbols as ruby does, serializing unaccessible attributes as &lt;code&gt;nil&lt;/code&gt; seems to a proper option. The consumers of the produced &lt;em&gt;json&lt;/em&gt; need to agree on the interpretation of a &lt;code&gt;null&lt;/code&gt; value in the received &lt;em&gt;json&lt;/em&gt; as a not accessible attribute.&lt;/p&gt;
+
+&lt;p&gt;Luckily the described strategy for serializing secured record is very simple. Heimdallr defines method &lt;code&gt;implicit&lt;/code&gt; which returns a proxy with a strategy returning &lt;code&gt;nil&lt;/code&gt; for unaccessible attributes.&lt;/p&gt;
+
+&lt;p&gt;I conclude this post with the short code doing the trick described above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;heimdallr&#39;
+require &#39;active_model_serializers&#39;
+
+module Heimdallr
+  class Proxy::Record
+    delegate :active_model_serializer, to: :@record
+
+    def read_attribute_for_serialization(name)
+      self.implicit.send name
+    end
+
+  end
+
+  class Proxy::Collection
+    include ActiveModel::ArraySerializerSupport
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Restricting Models with Heimdallr</title>
+      <link>//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr/</link>
+      <pubDate>Mon, 16 Jul 2012 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr/</guid>
+      <description>&lt;p&gt;I found myself several times implementing the logic for restrictions in controllers.
+Although that might be fine, when the things get more complex, this practice
+can become hard to maintain. As modeling restrictions belongs to the core logic of
+the application, perhaps they should be placed there..&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s what &lt;a href=&#34;http://github.com/roundlake/heimdallr&#34;&gt;heimdallr&lt;/a&gt; is supposed to resolve.
+This gem provides model level security by wrapping the model classes and
+instances by a proxy. The access rights are declared in the model:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Card &amp;lt; ActiveRecord::Base
+  include Heimdallr::Model
+
+  belongs_to :person
+  attr_accessible :suit, :rank, :backside
+
+  restrict do |person, card|
+    if person.arbiter?
+      # the arbiter can do anything
+      scope :fetch, -&amp;gt; {}
+    elsif person.playing?
+      # if the user is playing, only the card at hand is visible
+      scope :fetch, -&amp;gt; do
+        where([&#39;person_id = ?&#39;, person])
+      end
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;restrict&lt;/code&gt; block can take more parameters, based on these we can decide how
+to restrict the model. The last parameter (&lt;code&gt;card&lt;/code&gt; in the example) is an
+instance of the model, if it is &lt;code&gt;nil&lt;/code&gt; the model class was passed to the restrict
+block. The restriction can be thus called on either the model class or on a
+concrete instance: &lt;code&gt;Card.restrict(person)&lt;/code&gt; vs &lt;code&gt;card.restrict(person)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Heimdallr&lt;/em&gt; maintains a scope for fetching and deletion. Scope restriction are obviously
+useful when restricting the model class. Calling &lt;code&gt;all&lt;/code&gt; on the proxied model
+returns only the cards visible by the person. Wondering how to simply ask
+whether a card instance is visible by the person? &lt;code&gt;card.restrict(person).visible?&lt;/code&gt;
+does just that. For testing destroy-ability of a record there is &lt;code&gt;destroyable?&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I covered briefly scope restriction using &lt;em&gt;heimdallr&lt;/em&gt; in this post. However, there
+is yet more how &lt;em&gt;heimdallr&lt;/em&gt; can help. Finer restrictions, such as attribute visibility
+and updatability are often crucial as well. But let&amp;rsquo;s leave this for later.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

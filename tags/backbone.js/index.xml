@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Backbone.Js on another blog about coding</title>
+    <link>//fifigyuri.github.io/tags/backbone/index.js/</link>
+    <description>Recent content in Backbone.Js on another blog about coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Feb 2013 18:00:48 +0200</lastBuildDate>
+    <atom:link href="//fifigyuri.github.io/tags/backbone.js/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Backbone forms: How to get ids for objects created on the client side?</title>
+      <link>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
+      <pubDate>Sun, 10 Feb 2013 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
+      <description>&lt;p&gt;I am building an application which is built with &lt;em&gt;Backbone.js&lt;/em&gt;. It contains several forms, which make it possible to create sub-items in &lt;em&gt;collections&lt;/em&gt;. I run into the issue of getting the id for the recently created items. Let me explain the scenario:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;a new model instance is created with and an empty &lt;code&gt;id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;the form gets saved triggering a POST or PUT request&lt;/li&gt;
+&lt;li&gt;the server receives and saves the new and updated items&lt;/li&gt;
+&lt;li&gt;the new items get the &lt;code&gt;ids&lt;/code&gt; filled out&lt;/li&gt;
+&lt;li&gt;all items are sent back with updated server-side &lt;code&gt;ids&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The issue is with mapping the new &lt;code&gt;ids&lt;/code&gt; to the instances which are on the client side without an &lt;code&gt;id&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Backbone.js&lt;/em&gt; generates a unique client-side &lt;code&gt;cid&lt;/code&gt; for every object. The idea was to serialize the &lt;code&gt;cid&lt;/code&gt; and send it back from the server with the server side &lt;code&gt;id&lt;/code&gt;. As server I use rails. I added new virtual attribute &lt;code&gt;cid&lt;/code&gt; to the model and serialized it. For the client models serializing (&lt;code&gt;toJSON&lt;/code&gt;) and parsing needed to be updated. Method &lt;code&gt;toJSON&lt;/code&gt; was the easy part:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;toJSON: function() {
+  return _.extend(toJSON.__super__.constructor.apply(this, arguments),
+      { cid: this.cid })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bit trickier is handling of the response coming from the server. It&amp;rsquo;s necessary to identify the existing item using the &lt;code&gt;cid&lt;/code&gt; and update it with the new server side &lt;code&gt;id&lt;/code&gt;. After exploring several possible ways, how to do it wrong, I was &lt;a href=&#34;github.com/documentcloud/backbone/pull/2177&#34;&gt;advised&lt;/a&gt; to override the &lt;code&gt;parse&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;parse: function (resp) {
+  return _.map(resp, function (attrs) {
+    var cid = attrs.cid;
+    delete attrs.cid;
+    var existing = this.get(cid);
+    return existing ? existing.set(attrs).attributes : attrs;
+  }, this);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That simple definition of the &lt;code&gt;parse&lt;/code&gt; method showed me the elegance of backbone. Searching for a simple solution proved to be worthwhile.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

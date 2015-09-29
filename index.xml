@@ -1,39 +1,329 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>George Frivolt&#39;s blog about coding</title>
+    <title>another blog about coding</title>
     <link>//fifigyuri.github.io/</link>
-    <description>Recent content on George Frivolt&#39;s blog about coding</description>
+    <description>Recent content on another blog about coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2015 18:24:48 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 07 Aug 2015 18:00:48 +0200</lastBuildDate>
     <atom:link href="//fifigyuri.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>first</title>
-      <link>//fifigyuri.github.io/post/first/</link>
-      <pubDate>Tue, 22 Sep 2015 18:24:48 +0200</pubDate>
+      <title>Getting Cursive&#39;s Structural Editing to my Fingers</title>
+      <link>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</link>
+      <pubDate>Fri, 07 Aug 2015 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/first/</guid>
+      <guid>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</guid>
       <description>
 
-&lt;h1 id=&#34;first-post:e8fb9c67eba912c72729806db31eaa1b&#34;&gt;First Post&lt;/h1&gt;
+&lt;p&gt;Time to time, I question the habits I use in my development workflow. For a while, &lt;a href=&#34;https://cursiveclojure.com/&#34;&gt;Cursive&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://cursiveclojure.com/userguide/paredit.html&#34;&gt;structural editing&lt;/a&gt; inspired me. It seemed to be worth getting it into into my muscle memory.&lt;/p&gt;
 
-&lt;p&gt;blablabla&lt;/p&gt;
+&lt;h2 id=&#34;the-context:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;The Context&lt;/h2&gt;
+
+&lt;p&gt;With &lt;a href=&#34;http://www.vim.org/&#34;&gt;VIM&lt;/a&gt;, I started to look at editing as programming. I often use macros, and like to think about ways to reach my editing goals the quickest and most elegant way. VIM helps me express my goals in a powerful language.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.jetbrains.com/ruby/&#34;&gt;RubyMine&lt;/a&gt;&amp;rsquo;s refactoring tools helped me to work faster when I want to change my current design into another pattern. It&amp;rsquo;s more natural and easier to do when the editor understands patterns.&lt;/p&gt;
+
+&lt;p&gt;When the editor knows the language I&amp;rsquo;m thinking in, I don&amp;rsquo;t need to translate and it certainly saves me a few brain cycles in my workflow.&lt;/p&gt;
+
+&lt;p&gt;Structural editing in &lt;em&gt;Cursive&lt;/em&gt; is yet another way to express text manipulation tasks for Clojure expressions. As Clojure is a Lisp-dialect, the code itself is a data structure expressed in &lt;a href=&#34;https://en.wikipedia.org/wiki/S-expression&#34;&gt;s-expressions&lt;/a&gt;. Editing becomes data manipulation.&lt;/p&gt;
+
+&lt;p&gt;I had a bit of problem with shortcut conflicts between IntelliJ, Cursive/structural editing, Chrome, and OSX. I had also listed the changes I made in order to resolve those conflicts.&lt;/p&gt;
+
+&lt;p&gt;First, I needed to battle two curious-sounding operations &lt;em&gt;slurp&lt;/em&gt; and &lt;em&gt;barf&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;slurp-and-barf:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Slurp and Barf&lt;/h2&gt;
+
+&lt;p&gt;Simply told, slurp is like eating up an expression before or after the current list expression (based on the cursor position). Barfing is the inverse operation of slurping. It spits the first or the last expression out.&lt;/p&gt;
+
+&lt;p&gt;The default Cursive shortcuts seemed unintuitive at first, but, with a bit of imagination, they make sense.&lt;/p&gt;
+
+&lt;table class=&#34;table&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th/&gt;
+    &lt;th&gt;Backwards
+    &lt;th&gt;Forward
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;BARF&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⌃⌘K&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘J&lt;/code&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;SLURP&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⌃⌘J&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘K&lt;/code&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Both barf and slurp is about moving the bracket. Control keys &lt;code&gt;⌃⌘&lt;/code&gt; move the left, &lt;code&gt;⇧⌘&lt;/code&gt; move the right bracket, &lt;code&gt;K&lt;/code&gt; moves right, &lt;code&gt;J&lt;/code&gt; moves left. So, this makes it simple to translate that &lt;code&gt;⇧⌘K&lt;/code&gt; moves the right bracket to the right, so it “slurps” the expression behind the bracket.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;⇧⌘K&lt;/code&gt; was in conflict with the default setting for keyboard layout switching shortcut &lt;code&gt;⌘K&lt;/code&gt; on OSX. I changed that to &lt;code&gt;⌥⌘;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;brace-manipulations:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Brace manipulations&lt;/h2&gt;
+
+&lt;p&gt;Wrapping expression with braces works on the expression under the cursor or on selections.&lt;/p&gt;
+
+&lt;table class=&#34;table&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th/&gt;
+    &lt;th&gt;Wrapping
+    &lt;th&gt;Closing
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;parentheses ()&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘(&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘)&lt;/code&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;curly braces {}&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘{&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘}&lt;/code&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;brackets []&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘]&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘]&lt;/code&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Shortcuts &lt;code&gt;⇧⌘{&lt;/code&gt; and &lt;code&gt;⇧⌘}&lt;/code&gt;, although natural choices, are in conflict with tab navigation shortcuts used also in browsers. I chose to change the tab navigation shortcuts to &lt;code&gt;⌃J&lt;/code&gt; and &lt;code&gt;⌃K&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;refactoring-to-threading:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Refactoring to threading&lt;/h2&gt;
+
+&lt;p&gt;Threading macros (&lt;a href=&#34;https://clojuredocs.org/clojure.core/-%3E&#34;&gt;-&amp;gt;&lt;/a&gt; and &lt;a href=&#34;https://clojuredocs.org/clojure.core/-%3E%3E&#34;&gt;-&amp;gt;&amp;gt;&lt;/a&gt;) makes nested function calls simpler to read. Cursive&amp;rsquo;s structural editing supports this type of refactoring.&lt;/p&gt;
+
+&lt;p&gt;Turning nested function calls to threading works inside out. It&amp;rsquo;s probably the best to explain by example. Caret (&lt;code&gt;‸&lt;/code&gt;) shows the cursor position, makes a step by pressing &lt;code&gt;⌥⌘,&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;(d (c (b ‸a xb) xc) xd)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(d (c ‸(-&amp;gt; a (b xb)) xc) xd)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(d ‸(-&amp;gt; a (b xb) (c xc)) xd)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;‸(-&amp;gt; a (b xb) (c xc) (d xd))&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Mutating back to nested function calls is by &lt;code&gt;⌥⌘.&lt;/code&gt;. Every step keeps the braces balanced and evaluates the same expression.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;My goal was to start using structural editing with Cursive. During writing this post, I learnt a lot about it, and also got into a bit of a habit of using it in my workflow. Certainly, there is more to it, but I hope it would help to give some ideas on how to start.&lt;/p&gt;
+
+&lt;p&gt;There are also structural editing tools for other IDEs. &lt;a href=&#34;https://robots.thoughtbot.com/writing-clojure-in-vim&#34;&gt;This thoughtbot post&lt;/a&gt; discusses VIM structural editing.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>about</title>
-      <link>//fifigyuri.github.io/about/</link>
-      <pubDate>Tue, 22 Sep 2015 18:24:06 +0200</pubDate>
+      <title>Heimdallr with Active Model Serializers</title>
+      <link>//fifigyuri.github.io/post/20130813-heimdallr-with-active-model-serializers/</link>
+      <pubDate>Tue, 13 Aug 2013 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/about/</guid>
-      <description>
+      <guid>//fifigyuri.github.io/post/20130813-heimdallr-with-active-model-serializers/</guid>
+      <description>&lt;p&gt;I have introduced &lt;a href=&#34;https://github.com/inossidabile/heimdallr&#34;&gt;heimdallr&lt;/a&gt; in an &lt;a href=&#34;//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr&#34;&gt;earlier post&lt;/a&gt;. It is an excellent tool for securing models. &lt;code&gt;heimdallr&lt;/code&gt; can create proxies for collections and records, it is possible to define scopes for fetching and deletion, and which messages are permitted to be forwarded to the proxied record. I use &lt;code&gt;active_model_serializers&lt;/code&gt; for serialization. It provides an elegant way to define serialization rules for the models.&lt;/p&gt;
 
-&lt;h2 id=&#34;a-headline:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;A headline&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;active_model_serializers&lt;/code&gt; does not work with the collections and records secured by a proxy out of the box. It would be good to know what should happen when a not permitted attribute is accessed on the model. I thought about two options:&lt;/p&gt;
 
-&lt;p&gt;Some Content&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the serializer could raise a permission error or&lt;/li&gt;
+&lt;li&gt;it serializes a value interpreted as not readable.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I chose the second approach. However, as json does not know about symbols as ruby does, serializing unaccessible attributes as &lt;code&gt;nil&lt;/code&gt; seems to a proper option. The consumers of the produced &lt;em&gt;json&lt;/em&gt; need to agree on the interpretation of a &lt;code&gt;null&lt;/code&gt; value in the received &lt;em&gt;json&lt;/em&gt; as a not accessible attribute.&lt;/p&gt;
+
+&lt;p&gt;Luckily the described strategy for serializing secured record is very simple. Heimdallr defines method &lt;code&gt;implicit&lt;/code&gt; which returns a proxy with a strategy returning &lt;code&gt;nil&lt;/code&gt; for unaccessible attributes.&lt;/p&gt;
+
+&lt;p&gt;I conclude this post with the short code doing the trick described above:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;require &#39;heimdallr&#39;
+require &#39;active_model_serializers&#39;
+
+module Heimdallr
+  class Proxy::Record
+    delegate :active_model_serializer, to: :@record
+
+    def read_attribute_for_serialization(name)
+      self.implicit.send name
+    end
+
+  end
+
+  class Proxy::Collection
+    include ActiveModel::ArraySerializerSupport
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backbone forms: How to get ids for objects created on the client side?</title>
+      <link>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
+      <pubDate>Sun, 10 Feb 2013 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
+      <description>&lt;p&gt;I am building an application which is built with &lt;em&gt;Backbone.js&lt;/em&gt;. It contains several forms, which make it possible to create sub-items in &lt;em&gt;collections&lt;/em&gt;. I run into the issue of getting the id for the recently created items. Let me explain the scenario:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;a new model instance is created with and an empty &lt;code&gt;id&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;the form gets saved triggering a POST or PUT request&lt;/li&gt;
+&lt;li&gt;the server receives and saves the new and updated items&lt;/li&gt;
+&lt;li&gt;the new items get the &lt;code&gt;ids&lt;/code&gt; filled out&lt;/li&gt;
+&lt;li&gt;all items are sent back with updated server-side &lt;code&gt;ids&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The issue is with mapping the new &lt;code&gt;ids&lt;/code&gt; to the instances which are on the client side without an &lt;code&gt;id&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Backbone.js&lt;/em&gt; generates a unique client-side &lt;code&gt;cid&lt;/code&gt; for every object. The idea was to serialize the &lt;code&gt;cid&lt;/code&gt; and send it back from the server with the server side &lt;code&gt;id&lt;/code&gt;. As server I use rails. I added new virtual attribute &lt;code&gt;cid&lt;/code&gt; to the model and serialized it. For the client models serializing (&lt;code&gt;toJSON&lt;/code&gt;) and parsing needed to be updated. Method &lt;code&gt;toJSON&lt;/code&gt; was the easy part:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;toJSON: function() {
+  return _.extend(toJSON.__super__.constructor.apply(this, arguments),
+      { cid: this.cid })
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Bit trickier is handling of the response coming from the server. It&amp;rsquo;s necessary to identify the existing item using the &lt;code&gt;cid&lt;/code&gt; and update it with the new server side &lt;code&gt;id&lt;/code&gt;. After exploring several possible ways, how to do it wrong, I was &lt;a href=&#34;github.com/documentcloud/backbone/pull/2177&#34;&gt;advised&lt;/a&gt; to override the &lt;code&gt;parse&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;parse: function (resp) {
+  return _.map(resp, function (attrs) {
+    var cid = attrs.cid;
+    delete attrs.cid;
+    var existing = this.get(cid);
+    return existing ? existing.set(attrs).attributes : attrs;
+  }, this);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That simple definition of the &lt;code&gt;parse&lt;/code&gt; method showed me the elegance of backbone. Searching for a simple solution proved to be worthwhile.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Restricting Models with Heimdallr</title>
+      <link>//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr/</link>
+      <pubDate>Mon, 16 Jul 2012 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr/</guid>
+      <description>&lt;p&gt;I found myself several times implementing the logic for restrictions in controllers.
+Although that might be fine, when the things get more complex, this practice
+can become hard to maintain. As modeling restrictions belongs to the core logic of
+the application, perhaps they should be placed there..&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s what &lt;a href=&#34;http://github.com/roundlake/heimdallr&#34;&gt;heimdallr&lt;/a&gt; is supposed to resolve.
+This gem provides model level security by wrapping the model classes and
+instances by a proxy. The access rights are declared in the model:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ruby&#34;&gt;class Card &amp;lt; ActiveRecord::Base
+  include Heimdallr::Model
+
+  belongs_to :person
+  attr_accessible :suit, :rank, :backside
+
+  restrict do |person, card|
+    if person.arbiter?
+      # the arbiter can do anything
+      scope :fetch, -&amp;gt; {}
+    elsif person.playing?
+      # if the user is playing, only the card at hand is visible
+      scope :fetch, -&amp;gt; do
+        where([&#39;person_id = ?&#39;, person])
+      end
+    end
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;restrict&lt;/code&gt; block can take more parameters, based on these we can decide how
+to restrict the model. The last parameter (&lt;code&gt;card&lt;/code&gt; in the example) is an
+instance of the model, if it is &lt;code&gt;nil&lt;/code&gt; the model class was passed to the restrict
+block. The restriction can be thus called on either the model class or on a
+concrete instance: &lt;code&gt;Card.restrict(person)&lt;/code&gt; vs &lt;code&gt;card.restrict(person)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Heimdallr&lt;/em&gt; maintains a scope for fetching and deletion. Scope restriction are obviously
+useful when restricting the model class. Calling &lt;code&gt;all&lt;/code&gt; on the proxied model
+returns only the cards visible by the person. Wondering how to simply ask
+whether a card instance is visible by the person? &lt;code&gt;card.restrict(person).visible?&lt;/code&gt;
+does just that. For testing destroy-ability of a record there is &lt;code&gt;destroyable?&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I covered briefly scope restriction using &lt;em&gt;heimdallr&lt;/em&gt; in this post. However, there
+is yet more how &lt;em&gt;heimdallr&lt;/em&gt; can help. Finer restrictions, such as attribute visibility
+and updatability are often crucial as well. But let&amp;rsquo;s leave this for later.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Non-Modal Inline Dialogs: Ask Questions in Awesome Ways</title>
+      <link>//fifigyuri.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</link>
+      <pubDate>Sun, 15 Jul 2012 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</guid>
+      <description>&lt;p&gt;Asking questions, confirmations from the users is a pretty usual part of any
+user interface. Still often I find tackling this simple task solved in
+unsatisfying way. The simplest solution is the &lt;code&gt;confirm(&#39;ask your question..&#39;);&lt;/code&gt;
+dialog. However, this often ruins the otherwise possibly clean design. Confirm
+dialogs are modal and therefore users can not proceed further actions without
+answering the questions. But what if you do not need immediate answers?
+Often it is enough leaving the dialog questions opened. In such situation try
+using &amp;ldquo;inline dialogs&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://s3.amazonaws.com/georgefrivolt.blog/modaldialog.png&#34; alt=&#34;simple modal dialog with a yes-no question&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s build a simple scenario. We have three simple events which the user can
+trigger: calling a firemen, calling police or ambulance. Obviously triggering
+these events could be useful to handle with a simple question before they are
+really triggered. If this security question is answered positively, the event
+is triggered, otherwise the original &lt;em&gt;Call the &amp;hellip;&lt;/em&gt; link is rendered.
+The dialog blocks are divided into a trigger and question part.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markup&#34;&gt;    &amp;lt;DIV CLASS=&#39;dialog_block&#39; DATA-MESSAGE=&#39;Calling the firemen!&#39;&amp;gt;
+      &amp;lt;A HREF=&amp;quot;#&amp;quot; CLASS=&amp;quot;dialog_trigger&amp;quot;&amp;gt;Call the Firemen!&amp;lt;/A&amp;gt;
+      &amp;lt;DIV CLASS=&amp;quot;dialog_question&amp;quot;&amp;gt;
+        Call? 
+        &amp;lt;A HREF=&amp;quot;#&amp;quot; CLASS=&amp;quot;answer_yes&amp;quot;&amp;gt;Yes&amp;lt;/A&amp;gt;
+        &amp;lt;A HREF=&amp;quot;#&amp;quot; CLASS=&amp;quot;answer_no&amp;quot;&amp;gt;No&amp;lt;/A&amp;gt;
+      &amp;lt;/DIV&amp;gt;
+    &amp;lt;/DIV&amp;gt;
+    &amp;lt;!-- do something similar for the two other calls --&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For handling the dialog actions I use jQuery now. We need only three simple
+callbacks for handlers: activation of the question trigger, handler for the yes
+and the no answer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var turnOffDialogQuestion = function(el) {
+  $dialog_block = getDialogBlock(el);
+  $dialog_block
+  .find(&#39;.dialog_question&#39;)
+  .fadeOut(&#39;fast&#39;,
+    function() {
+      $dialog_block
+      .find(&#39;.dialog_trigger&#39;)
+      .fadeIn(&#39;fast&#39;);
+    });
+};
+var getDialogBlock = function(el) {
+  return $(el).parents(&#39;.dialog_block&#39;);
+};
+$(document).ready(function() {
+  $(&#39;.dialog_trigger&#39;).click(function(ev) {
+    $dialog_block = getDialogBlock(this);
+    $(this).fadeOut(&#39;fast&#39;,
+      function() {
+        $dialog_block
+        .find(&#39;.dialog_question&#39;)
+        .fadeIn(&#39;fast&#39;);
+      });
+    ev.preventDefault();
+    return false;
+  });
+  $(&#39;.dialog_question .answer_yes&#39;)
+  .click(function(ev) {
+    alert(getDialogBlock(this).data(&#39;message&#39;));
+    turnOffDialogQuestion(this);
+    ev.preventDefault();
+    return false;
+  });
+  $(&#39;.dialog_question .answer_no&#39;)
+  .click(function(ev) {
+    turnOffDialogQuestion(this);
+    ev.preventDefault();
+    return false;
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     

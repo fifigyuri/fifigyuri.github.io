@@ -1,0 +1,147 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.14" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Getting Cursive&#39;s Structural Editing to my Fingers &middot; another blog about coding </title>
+
+  
+  <link rel="stylesheet" href="//fifigyuri.github.io/css/poole.css">
+  <link rel="stylesheet" href="//fifigyuri.github.io/css/syntax.css">
+  <link rel="stylesheet" href="//fifigyuri.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="another blog about coding" />
+</head>
+
+	<body class="theme-base-0f">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="//fifigyuri.github.io/"><h1>another blog about coding</h1></a>
+      <p class="lead">
+       notebook of a curious developer 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2015. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>Getting Cursive&#39;s Structural Editing to my Fingers</h1>
+			  <span class="post-date">Fri, Aug 7, 2015</span>
+			      
+
+<p>Time to time, I question the habits I use in my development workflow. For a while, <a href="https://cursiveclojure.com/">Cursive</a>&rsquo;s <a href="https://cursiveclojure.com/userguide/paredit.html">structural editing</a> inspired me. It seemed to be worth getting it into into my muscle memory.</p>
+
+<h2 id="the-context:eef67f4e9e45ce75d1dfa0e0996bccc6">The Context</h2>
+
+<p>With <a href="http://www.vim.org/">VIM</a>, I started to look at editing as programming. I often use macros, and like to think about ways to reach my editing goals the quickest and most elegant way. VIM helps me express my goals in a powerful language.</p>
+
+<p><a href="https://www.jetbrains.com/ruby/">RubyMine</a>&rsquo;s refactoring tools helped me to work faster when I want to change my current design into another pattern. It&rsquo;s more natural and easier to do when the editor understands patterns.</p>
+
+<p>When the editor knows the language I&rsquo;m thinking in, I don&rsquo;t need to translate and it certainly saves me a few brain cycles in my workflow.</p>
+
+<p>Structural editing in <em>Cursive</em> is yet another way to express text manipulation tasks for Clojure expressions. As Clojure is a Lisp-dialect, the code itself is a data structure expressed in <a href="https://en.wikipedia.org/wiki/S-expression">s-expressions</a>. Editing becomes data manipulation.</p>
+
+<p>I had a bit of problem with shortcut conflicts between IntelliJ, Cursive/structural editing, Chrome, and OSX. I had also listed the changes I made in order to resolve those conflicts.</p>
+
+<p>First, I needed to battle two curious-sounding operations <em>slurp</em> and <em>barf</em>.</p>
+
+<h2 id="slurp-and-barf:eef67f4e9e45ce75d1dfa0e0996bccc6">Slurp and Barf</h2>
+
+<p>Simply told, slurp is like eating up an expression before or after the current list expression (based on the cursor position). Barfing is the inverse operation of slurping. It spits the first or the last expression out.</p>
+
+<p>The default Cursive shortcuts seemed unintuitive at first, but, with a bit of imagination, they make sense.</p>
+
+<table class="table">
+<thead>
+<tr><th/>
+    <th>Backwards
+    <th>Forward
+</thead>
+<tbody>
+<tr><td><b>BARF</b>
+    <td><code>⌃⌘K</code>
+    <td><code>⇧⌘J</code>
+<tr><td><b>SLURP</b>
+    <td><code>⌃⌘J</code>
+    <td><code>⇧⌘K</code>
+</tbody>
+</table>
+
+<p>Both barf and slurp is about moving the bracket. Control keys <code>⌃⌘</code> move the left, <code>⇧⌘</code> move the right bracket, <code>K</code> moves right, <code>J</code> moves left. So, this makes it simple to translate that <code>⇧⌘K</code> moves the right bracket to the right, so it “slurps” the expression behind the bracket.</p>
+
+<p><code>⇧⌘K</code> was in conflict with the default setting for keyboard layout switching shortcut <code>⌘K</code> on OSX. I changed that to <code>⌥⌘;</code>.</p>
+
+<h2 id="brace-manipulations:eef67f4e9e45ce75d1dfa0e0996bccc6">Brace manipulations</h2>
+
+<p>Wrapping expression with braces works on the expression under the cursor or on selections.</p>
+
+<table class="table">
+<thead>
+<tr><th/>
+    <th>Wrapping
+    <th>Closing
+</thead>
+<tbody>
+<tr><td><b>parentheses ()</b>
+    <td><code>⇧⌘(</code>
+    <td><code>⇧⌘)</code>
+<tr><td><b>curly braces {}</b>
+    <td><code>⇧⌘{</code>
+    <td><code>⇧⌘}</code>
+<tr><td><b>brackets []</b>
+    <td><code>⇧⌘]</code>
+    <td><code>⇧⌘]</code>
+</tbody>
+</table>
+
+<p>Shortcuts <code>⇧⌘{</code> and <code>⇧⌘}</code>, although natural choices, are in conflict with tab navigation shortcuts used also in browsers. I chose to change the tab navigation shortcuts to <code>⌃J</code> and <code>⌃K</code>.</p>
+
+<h2 id="refactoring-to-threading:eef67f4e9e45ce75d1dfa0e0996bccc6">Refactoring to threading</h2>
+
+<p>Threading macros (<a href="https://clojuredocs.org/clojure.core/-%3E">-&gt;</a> and <a href="https://clojuredocs.org/clojure.core/-%3E%3E">-&gt;&gt;</a>) makes nested function calls simpler to read. Cursive&rsquo;s structural editing supports this type of refactoring.</p>
+
+<p>Turning nested function calls to threading works inside out. It&rsquo;s probably the best to explain by example. Caret (<code>‸</code>) shows the cursor position, makes a step by pressing <code>⌥⌘,</code>.</p>
+
+<ol>
+<li><code>(d (c (b ‸a xb) xc) xd)</code></li>
+<li><code>(d (c ‸(-&gt; a (b xb)) xc) xd)</code></li>
+<li><code>(d ‸(-&gt; a (b xb) (c xc)) xd)</code></li>
+<li><code>‸(-&gt; a (b xb) (c xc) (d xd))</code></li>
+</ol>
+
+<p>Mutating back to nested function calls is by <code>⌥⌘.</code>. Every step keeps the braces balanced and evaluates the same expression.</p>
+
+<h2 id="conclusion:eef67f4e9e45ce75d1dfa0e0996bccc6">Conclusion</h2>
+
+<p>My goal was to start using structural editing with Cursive. During writing this post, I learnt a lot about it, and also got into a bit of a habit of using it in my workflow. Certainly, there is more to it, but I hope it would help to give some ideas on how to start.</p>
+
+<p>There are also structural editing tools for other IDEs. <a href="https://robots.thoughtbot.com/writing-clojure-in-vim">This thoughtbot post</a> discusses VIM structural editing.</p>
+
+			</div>
+
+			
+		</div>
+
+  </body>
+</html>

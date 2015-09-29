@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clojure on another blog about coding</title>
+    <link>//fifigyuri.github.io/tags/clojure/</link>
+    <description>Recent content in Clojure on another blog about coding</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Aug 2015 18:00:48 +0200</lastBuildDate>
+    <atom:link href="//fifigyuri.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Getting Cursive&#39;s Structural Editing to my Fingers</title>
+      <link>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</link>
+      <pubDate>Fri, 07 Aug 2015 18:00:48 +0200</pubDate>
+      
+      <guid>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</guid>
+      <description>
+
+&lt;p&gt;Time to time, I question the habits I use in my development workflow. For a while, &lt;a href=&#34;https://cursiveclojure.com/&#34;&gt;Cursive&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://cursiveclojure.com/userguide/paredit.html&#34;&gt;structural editing&lt;/a&gt; inspired me. It seemed to be worth getting it into into my muscle memory.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-context:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;The Context&lt;/h2&gt;
+
+&lt;p&gt;With &lt;a href=&#34;http://www.vim.org/&#34;&gt;VIM&lt;/a&gt;, I started to look at editing as programming. I often use macros, and like to think about ways to reach my editing goals the quickest and most elegant way. VIM helps me express my goals in a powerful language.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.jetbrains.com/ruby/&#34;&gt;RubyMine&lt;/a&gt;&amp;rsquo;s refactoring tools helped me to work faster when I want to change my current design into another pattern. It&amp;rsquo;s more natural and easier to do when the editor understands patterns.&lt;/p&gt;
+
+&lt;p&gt;When the editor knows the language I&amp;rsquo;m thinking in, I don&amp;rsquo;t need to translate and it certainly saves me a few brain cycles in my workflow.&lt;/p&gt;
+
+&lt;p&gt;Structural editing in &lt;em&gt;Cursive&lt;/em&gt; is yet another way to express text manipulation tasks for Clojure expressions. As Clojure is a Lisp-dialect, the code itself is a data structure expressed in &lt;a href=&#34;https://en.wikipedia.org/wiki/S-expression&#34;&gt;s-expressions&lt;/a&gt;. Editing becomes data manipulation.&lt;/p&gt;
+
+&lt;p&gt;I had a bit of problem with shortcut conflicts between IntelliJ, Cursive/structural editing, Chrome, and OSX. I had also listed the changes I made in order to resolve those conflicts.&lt;/p&gt;
+
+&lt;p&gt;First, I needed to battle two curious-sounding operations &lt;em&gt;slurp&lt;/em&gt; and &lt;em&gt;barf&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;slurp-and-barf:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Slurp and Barf&lt;/h2&gt;
+
+&lt;p&gt;Simply told, slurp is like eating up an expression before or after the current list expression (based on the cursor position). Barfing is the inverse operation of slurping. It spits the first or the last expression out.&lt;/p&gt;
+
+&lt;p&gt;The default Cursive shortcuts seemed unintuitive at first, but, with a bit of imagination, they make sense.&lt;/p&gt;
+
+&lt;table class=&#34;table&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th/&gt;
+    &lt;th&gt;Backwards
+    &lt;th&gt;Forward
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;BARF&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⌃⌘K&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘J&lt;/code&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;SLURP&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⌃⌘J&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘K&lt;/code&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Both barf and slurp is about moving the bracket. Control keys &lt;code&gt;⌃⌘&lt;/code&gt; move the left, &lt;code&gt;⇧⌘&lt;/code&gt; move the right bracket, &lt;code&gt;K&lt;/code&gt; moves right, &lt;code&gt;J&lt;/code&gt; moves left. So, this makes it simple to translate that &lt;code&gt;⇧⌘K&lt;/code&gt; moves the right bracket to the right, so it “slurps” the expression behind the bracket.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;⇧⌘K&lt;/code&gt; was in conflict with the default setting for keyboard layout switching shortcut &lt;code&gt;⌘K&lt;/code&gt; on OSX. I changed that to &lt;code&gt;⌥⌘;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;brace-manipulations:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Brace manipulations&lt;/h2&gt;
+
+&lt;p&gt;Wrapping expression with braces works on the expression under the cursor or on selections.&lt;/p&gt;
+
+&lt;table class=&#34;table&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th/&gt;
+    &lt;th&gt;Wrapping
+    &lt;th&gt;Closing
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;parentheses ()&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘(&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘)&lt;/code&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;curly braces {}&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘{&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘}&lt;/code&gt;
+&lt;tr&gt;&lt;td&gt;&lt;b&gt;brackets []&lt;/b&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘]&lt;/code&gt;
+    &lt;td&gt;&lt;code&gt;⇧⌘]&lt;/code&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Shortcuts &lt;code&gt;⇧⌘{&lt;/code&gt; and &lt;code&gt;⇧⌘}&lt;/code&gt;, although natural choices, are in conflict with tab navigation shortcuts used also in browsers. I chose to change the tab navigation shortcuts to &lt;code&gt;⌃J&lt;/code&gt; and &lt;code&gt;⌃K&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;refactoring-to-threading:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Refactoring to threading&lt;/h2&gt;
+
+&lt;p&gt;Threading macros (&lt;a href=&#34;https://clojuredocs.org/clojure.core/-%3E&#34;&gt;-&amp;gt;&lt;/a&gt; and &lt;a href=&#34;https://clojuredocs.org/clojure.core/-%3E%3E&#34;&gt;-&amp;gt;&amp;gt;&lt;/a&gt;) makes nested function calls simpler to read. Cursive&amp;rsquo;s structural editing supports this type of refactoring.&lt;/p&gt;
+
+&lt;p&gt;Turning nested function calls to threading works inside out. It&amp;rsquo;s probably the best to explain by example. Caret (&lt;code&gt;‸&lt;/code&gt;) shows the cursor position, makes a step by pressing &lt;code&gt;⌥⌘,&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;(d (c (b ‸a xb) xc) xd)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(d (c ‸(-&amp;gt; a (b xb)) xc) xd)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(d ‸(-&amp;gt; a (b xb) (c xc)) xd)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;‸(-&amp;gt; a (b xb) (c xc) (d xd))&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Mutating back to nested function calls is by &lt;code&gt;⌥⌘.&lt;/code&gt;. Every step keeps the braces balanced and evaluates the same expression.&lt;/p&gt;
+
+&lt;h2 id=&#34;conclusion:eef67f4e9e45ce75d1dfa0e0996bccc6&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;My goal was to start using structural editing with Cursive. During writing this post, I learnt a lot about it, and also got into a bit of a habit of using it in my workflow. Certainly, there is more to it, but I hope it would help to give some ideas on how to start.&lt;/p&gt;
+
+&lt;p&gt;There are also structural editing tools for other IDEs. &lt;a href=&#34;https://robots.thoughtbot.com/writing-clojure-in-vim&#34;&gt;This thoughtbot post&lt;/a&gt; discusses VIM structural editing.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

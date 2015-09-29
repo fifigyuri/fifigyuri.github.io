@@ -1,0 +1,91 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.14" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> Backbone forms: How to get ids for objects created on the client side? &middot; another blog about coding </title>
+
+  
+  <link rel="stylesheet" href="//fifigyuri.github.io/css/poole.css">
+  <link rel="stylesheet" href="//fifigyuri.github.io/css/syntax.css">
+  <link rel="stylesheet" href="//fifigyuri.github.io/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="another blog about coding" />
+</head>
+
+	<body class="theme-base-0f">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="//fifigyuri.github.io/"><h1>another blog about coding</h1></a>
+      <p class="lead">
+       notebook of a curious developer 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+    </ul>
+
+    <p>&copy; 2015. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>Backbone forms: How to get ids for objects created on the client side?</h1>
+			  <span class="post-date">Sun, Feb 10, 2013</span>
+			      <p>I am building an application which is built with <em>Backbone.js</em>. It contains several forms, which make it possible to create sub-items in <em>collections</em>. I run into the issue of getting the id for the recently created items. Let me explain the scenario:</p>
+
+<ol>
+<li>a new model instance is created with and an empty <code>id</code></li>
+<li>the form gets saved triggering a POST or PUT request</li>
+<li>the server receives and saves the new and updated items</li>
+<li>the new items get the <code>ids</code> filled out</li>
+<li>all items are sent back with updated server-side <code>ids</code></li>
+</ol>
+
+<p>The issue is with mapping the new <code>ids</code> to the instances which are on the client side without an <code>id</code>.</p>
+
+<p><em>Backbone.js</em> generates a unique client-side <code>cid</code> for every object. The idea was to serialize the <code>cid</code> and send it back from the server with the server side <code>id</code>. As server I use rails. I added new virtual attribute <code>cid</code> to the model and serialized it. For the client models serializing (<code>toJSON</code>) and parsing needed to be updated. Method <code>toJSON</code> was the easy part:</p>
+
+<pre><code class="language-javascript">toJSON: function() {
+  return _.extend(toJSON.__super__.constructor.apply(this, arguments),
+      { cid: this.cid })
+}
+</code></pre>
+
+<p>Bit trickier is handling of the response coming from the server. It&rsquo;s necessary to identify the existing item using the <code>cid</code> and update it with the new server side <code>id</code>. After exploring several possible ways, how to do it wrong, I was <a href="github.com/documentcloud/backbone/pull/2177">advised</a> to override the <code>parse</code> method.</p>
+
+<pre><code class="language-javascript">parse: function (resp) {
+  return _.map(resp, function (attrs) {
+    var cid = attrs.cid;
+    delete attrs.cid;
+    var existing = this.get(cid);
+    return existing ? existing.set(attrs).attributes : attrs;
+  }, this);
+}
+</code></pre>
+
+<p>That simple definition of the <code>parse</code> method showed me the elegance of backbone. Searching for a simple solution proved to be worthwhile.</p>
+
+			</div>
+
+			
+		</div>
+
+  </body>
+</html>
