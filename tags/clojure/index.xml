@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Clojure on another blog about coding</title>
-    <link>//fifigyuri.github.io/tags/clojure/</link>
+    <link>//gfrivolt.github.io/tags/clojure/</link>
     <description>Recent content in Clojure on another blog about coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 07 Aug 2015 18:00:48 +0200</lastBuildDate>
-    <atom:link href="//fifigyuri.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//gfrivolt.github.io/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Getting Cursive&#39;s Structural Editing to my Fingers</title>
-      <link>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</link>
+      <link>//gfrivolt.github.io/post/20150807-cursive-structural-editing/</link>
       <pubDate>Fri, 07 Aug 2015 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</guid>
+      <guid>//gfrivolt.github.io/post/20150807-cursive-structural-editing/</guid>
       <description>
 
 &lt;p&gt;Time to time, I question the habits I use in my development workflow. For a while, &lt;a href=&#34;https://cursiveclojure.com/&#34;&gt;Cursive&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://cursiveclojure.com/userguide/paredit.html&#34;&gt;structural editing&lt;/a&gt; inspired me. It seemed to be worth getting it into into my muscle memory.&lt;/p&gt;

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on another blog about coding</title>
-    <link>//fifigyuri.github.io/tags/javascript/</link>
+    <link>//gfrivolt.github.io/tags/javascript/</link>
     <description>Recent content in Javascript on another blog about coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Feb 2013 18:00:48 +0200</lastBuildDate>
-    <atom:link href="//fifigyuri.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//gfrivolt.github.io/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Backbone forms: How to get ids for objects created on the client side?</title>
-      <link>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
+      <link>//gfrivolt.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
       <pubDate>Sun, 10 Feb 2013 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
+      <guid>//gfrivolt.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
       <description>&lt;p&gt;I am building an application which is built with &lt;em&gt;Backbone.js&lt;/em&gt;. It contains several forms, which make it possible to create sub-items in &lt;em&gt;collections&lt;/em&gt;. I run into the issue of getting the id for the recently created items. Let me explain the scenario:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -53,10 +53,10 @@
     
     <item>
       <title>Non-Modal Inline Dialogs: Ask Questions in Awesome Ways</title>
-      <link>//fifigyuri.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</link>
+      <link>//gfrivolt.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</link>
       <pubDate>Sun, 15 Jul 2012 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</guid>
+      <guid>//gfrivolt.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</guid>
       <description>&lt;p&gt;Asking questions, confirmations from the users is a pretty usual part of any
 user interface. Still often I find tackling this simple task solved in
 unsatisfying way. The simplest solution is the &lt;code&gt;confirm(&#39;ask your question..&#39;);&lt;/code&gt;

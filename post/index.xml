@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on another blog about coding</title>
-    <link>//fifigyuri.github.io/post/</link>
+    <link>//gfrivolt.github.io/post/</link>
     <description>Recent content in Posts on another blog about coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 07 Aug 2015 18:00:48 +0200</lastBuildDate>
-    <atom:link href="//fifigyuri.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//gfrivolt.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Getting Cursive&#39;s Structural Editing to my Fingers</title>
-      <link>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</link>
+      <link>//gfrivolt.github.io/post/20150807-cursive-structural-editing/</link>
       <pubDate>Fri, 07 Aug 2015 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20150807-cursive-structural-editing/</guid>
+      <guid>//gfrivolt.github.io/post/20150807-cursive-structural-editing/</guid>
       <description>
 
 &lt;p&gt;Time to time, I question the habits I use in my development workflow. For a while, &lt;a href=&#34;https://cursiveclojure.com/&#34;&gt;Cursive&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://cursiveclojure.com/userguide/paredit.html&#34;&gt;structural editing&lt;/a&gt; inspired me. It seemed to be worth getting it into into my muscle memory.&lt;/p&gt;
@@ -109,11 +109,11 @@
     
     <item>
       <title>Heimdallr with Active Model Serializers</title>
-      <link>//fifigyuri.github.io/post/20130813-heimdallr-with-active-model-serializers/</link>
+      <link>//gfrivolt.github.io/post/20130813-heimdallr-with-active-model-serializers/</link>
       <pubDate>Tue, 13 Aug 2013 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20130813-heimdallr-with-active-model-serializers/</guid>
-      <description>&lt;p&gt;I have introduced &lt;a href=&#34;https://github.com/inossidabile/heimdallr&#34;&gt;heimdallr&lt;/a&gt; in an &lt;a href=&#34;//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr&#34;&gt;earlier post&lt;/a&gt;. It is an excellent tool for securing models. &lt;code&gt;heimdallr&lt;/code&gt; can create proxies for collections and records, it is possible to define scopes for fetching and deletion, and which messages are permitted to be forwarded to the proxied record. I use &lt;code&gt;active_model_serializers&lt;/code&gt; for serialization. It provides an elegant way to define serialization rules for the models.&lt;/p&gt;
+      <guid>//gfrivolt.github.io/post/20130813-heimdallr-with-active-model-serializers/</guid>
+      <description>&lt;p&gt;I have introduced &lt;a href=&#34;https://github.com/inossidabile/heimdallr&#34;&gt;heimdallr&lt;/a&gt; in an &lt;a href=&#34;//gfrivolt.github.io/post/20120716-restricting-models-with-heimdallr&#34;&gt;earlier post&lt;/a&gt;. It is an excellent tool for securing models. &lt;code&gt;heimdallr&lt;/code&gt; can create proxies for collections and records, it is possible to define scopes for fetching and deletion, and which messages are permitted to be forwarded to the proxied record. I use &lt;code&gt;active_model_serializers&lt;/code&gt; for serialization. It provides an elegant way to define serialization rules for the models.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;active_model_serializers&lt;/code&gt; does not work with the collections and records secured by a proxy out of the box. It would be good to know what should happen when a not permitted attribute is accessed on the model. I thought about two options:&lt;/p&gt;
 
@@ -151,10 +151,10 @@ end
     
     <item>
       <title>Backbone forms: How to get ids for objects created on the client side?</title>
-      <link>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
+      <link>//gfrivolt.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
       <pubDate>Sun, 10 Feb 2013 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
+      <guid>//gfrivolt.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
       <description>&lt;p&gt;I am building an application which is built with &lt;em&gt;Backbone.js&lt;/em&gt;. It contains several forms, which make it possible to create sub-items in &lt;em&gt;collections&lt;/em&gt;. I run into the issue of getting the id for the recently created items. Let me explain the scenario:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -193,10 +193,10 @@ end
     
     <item>
       <title>Restricting Models with Heimdallr</title>
-      <link>//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr/</link>
+      <link>//gfrivolt.github.io/post/20120716-restricting-models-with-heimdallr/</link>
       <pubDate>Mon, 16 Jul 2012 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20120716-restricting-models-with-heimdallr/</guid>
+      <guid>//gfrivolt.github.io/post/20120716-restricting-models-with-heimdallr/</guid>
       <description>&lt;p&gt;I found myself several times implementing the logic for restrictions in controllers.
 Although that might be fine, when the things get more complex, this practice
 can become hard to maintain. As modeling restrictions belongs to the core logic of
@@ -246,10 +246,10 @@ and updatability are often crucial as well. But let&amp;rsquo;s leave this for l
     
     <item>
       <title>Non-Modal Inline Dialogs: Ask Questions in Awesome Ways</title>
-      <link>//fifigyuri.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</link>
+      <link>//gfrivolt.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</link>
       <pubDate>Sun, 15 Jul 2012 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</guid>
+      <guid>//gfrivolt.github.io/post/20120715-non-modal-inline-dialogs-ask-questions-in-awesome-ways/</guid>
       <description>&lt;p&gt;Asking questions, confirmations from the users is a pretty usual part of any
 user interface. Still often I find tackling this simple task solved in
 unsatisfying way. The simplest solution is the &lt;code&gt;confirm(&#39;ask your question..&#39;);&lt;/code&gt;

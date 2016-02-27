@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Backbone.Js on another blog about coding</title>
-    <link>//fifigyuri.github.io/tags/backbone/index.js/</link>
+    <link>//gfrivolt.github.io/tags/backbone/index.js/</link>
     <description>Recent content in Backbone.Js on another blog about coding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Feb 2013 18:00:48 +0200</lastBuildDate>
-    <atom:link href="//fifigyuri.github.io/tags/backbone.js/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="//gfrivolt.github.io/tags/backbone.js/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Backbone forms: How to get ids for objects created on the client side?</title>
-      <link>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
+      <link>//gfrivolt.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</link>
       <pubDate>Sun, 10 Feb 2013 18:00:48 +0200</pubDate>
       
-      <guid>//fifigyuri.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
+      <guid>//gfrivolt.github.io/post/20130210-backbone-forms-how-to-get-ids-for-objects-created-on-the-client-side/</guid>
       <description>&lt;p&gt;I am building an application which is built with &lt;em&gt;Backbone.js&lt;/em&gt;. It contains several forms, which make it possible to create sub-items in &lt;em&gt;collections&lt;/em&gt;. I run into the issue of getting the id for the recently created items. Let me explain the scenario:&lt;/p&gt;
 
 &lt;ol&gt;
