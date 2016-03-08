@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/fifigyuri
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://george.frivolt.me
+  * I am fifigyuri (https://keybase.io/fifigyuri) on keybase.
+  * I have a public key ASAYBel4cYx7w_J0h12hwwy1hU1ykGovGl3XMpuIYaqD7Ao
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01014e314b1a0257dcb90adf6c8e4716188da67ef28901b67ce26ccefd91482fdf880a",
+            "host": "keybase.io",
+            "kid": "01201805e978718c7bc3f274875da1c30cb5854d72906a2f1a5dd7329b8861aa83ec0a",
+            "uid": "4328e91ba7fbe5111c5f71b45b276200",
+            "username": "fifigyuri"
+        },
+        "service": {
+            "hostname": "george.frivolt.me",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.13"
+    },
+    "ctime": 1457443922,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1457443913,
+        "hash": "d50930af481fe1019975e28bb8f0aab1b7d96f6b9b48d24381b16a132018cb1d44f29769bf5eaa3438e98e3bdc44d1534bd9e828918aa1cabc5ad9e33edd0cfc",
+        "seqno": 403084
+    },
+    "prev": "87d5972f182f5471e16ca644546cb8ded6bf7487fb3a2396a1d81c3a8d007c8a",
+    "seqno": 25,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+g6Rib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgGAXpeHGMe8PydIddocMMtYVNcpBqLxpd1zKbiGGqg+wKp3BheWxvYWTFAvp7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxNGUzMTRiMWEwMjU3ZGNiOTBhZGY2YzhlNDcxNjE4OGRhNjdlZjI4OTAxYjY3Y2UyNmNjZWZkOTE0ODJmZGY4ODBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwMTgwNWU5Nzg3MThjN2JjM2YyNzQ4NzVkYTFjMzBjYjU4NTRkNzI5MDZhMmYxYTVkZDczMjliODg2MWFhODNlYzBhIiwidWlkIjoiNDMyOGU5MWJhN2ZiZTUxMTFjNWY3MWI0NWIyNzYyMDAiLCJ1c2VybmFtZSI6ImZpZmlneXVyaSJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiZ2VvcmdlLmZyaXZvbHQubWUiLCJwcm90b2NvbCI6Imh0dHA6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjEzIn0sImN0aW1lIjoxNDU3NDQzOTIyLCJleHBpcmVfaW4iOjUwNDU3NjAwMCwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE0NTc0NDM5MTMsImhhc2giOiJkNTA5MzBhZjQ4MWZlMTAxOTk3NWUyOGJiOGYwYWFiMWI3ZDk2ZjZiOWI0OGQyNDM4MWIxNmExMzIwMThjYjFkNDRmMjk3NjliZjVlYWEzNDM4ZTk4ZTNiZGM0NGQxNTM0YmQ5ZTgyODkxOGFhMWNhYmM1YWQ5ZTMzZWRkMGNmYyIsInNlcW5vIjo0MDMwODR9LCJwcmV2IjoiODdkNTk3MmYxODJmNTQ3MWUxNmNhNjQ0NTQ2Y2I4ZGVkNmJmNzQ4N2ZiM2EyMzk2YTFkODFjM2E4ZDAwN2M4YSIsInNlcW5vIjoyNSwidGFnIjoic2lnbmF0dXJlIn2jc2lnxED/20Nq8DIL+ImMmzDW7Jmffp7LHZ50WNvyF4klLVXWzBnGsjzcJDcZ9XIeX2b32GaLsJRarAmbqOpNt9G309EOqHNpZ190eXBlIKN0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/fifigyuri
+
+==================================================================
